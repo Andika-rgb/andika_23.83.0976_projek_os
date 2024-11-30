@@ -4,7 +4,7 @@ andika hendrawan_23.83.0976_23TK01
 # Judul: Manajemen Server Terpadu dengan Nginx, PostgreSQL, Flask, Grafana, dan Keycloak
 
 # Update sistem
-apt update && apt upgrade -y ||
+    apt update && apt upgrade -y ||
 
 # 1. INSTALASI NGINX (Web Server)
     apt install nginx -y || error_exit "Gagal instal Nginx"
