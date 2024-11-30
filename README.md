@@ -1,6 +1,8 @@
 # andika_23.83.0976_projek_os
 andika hendrawan_23.83.0976_23TK01
 
+#Judul: Manajemen Server Terpadu dengan Nginx, PostgreSQL, Flask, Grafana, dan Keycloak
+
 # Update sistem
 apt update && apt upgrade -y ||
 
