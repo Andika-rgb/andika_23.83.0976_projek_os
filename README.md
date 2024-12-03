@@ -3,6 +3,27 @@ andika hendrawan_23.83.0976_23TK01
 
 # Judul: Manajemen Server Terpadu dengan Nginx, PostgreSQL, Flask, Grafana, dan Keycloak
 
+# Rombakan
+# 1.APACHE
+    sudo apt update
+    sudo apt install apache2
+    sudo systemctl start apache2
+    sudo systemctl enable apache2
+     sudo apt install git
+    sudo mkdir -p /var/www/server1
+    sudo nano /etc/apache2/sites-available/andikatravel.conf
+    
+    sudo git clone https://github.com/Andika-rgb/AndikaTravel.github.io.git
+    sudo sytemctl restart apache2
+    sudo chown -R $USER:$USER /var/www/server2
+    sudo chmod -R 755 /var/www
+    sudo a2ensite server1.conf
+    Enabling site server1.
+    sudo a2dissite 000-default.conf
+    sudo systemctl reload apache2
+
+
+
 # Update sistem
     apt update && apt upgrade -y ||
 
