@@ -35,4 +35,45 @@ andika hendrawan_23.83.0976_23TK01
 # Pastikan direktori memiliki hak akses yang benar:
     sudo chown -R www-data:www-data /var/www/server1/AndikaTravel.github.io
     sudo chmod -R 755 /var/www/your-website
+
+# 2. wordpress
+
+# Instal MySQL:
+    sudo apt install mysql-server
+# Instal PHP dan modul yang diperlukan:
+    sudo apt install php libapache2-mod-php php-mysql php-xml php-mbstring
+# Masuk ke MySQL, dan Buat database dan user untuk WordPress::
+    sudo mysql
+
+    CREATE DATABASE wordpress;
+    CREATE USER 'dika'@'192.168.100.58' IDENTIFIED BY 'terlalu12';
+    GRANT ALL PRIVILEGES ON wordpress.* TO 'dika'@'192.168.100.58';
+    FLUSH PRIVILEGES;
+    EXIT;
+# Unduh dan Ekstrak WordPress:
+    cd /var/www/
+    sudo curl -O https://wordpress.org/latest.tar.gz
+    sudo tar xzvf latest.tar.gz
+    sudo mv wordpress /var/www/server1/AndikaTravel.github.io
+# Set Hak Akses:
+    sudo chown -R www-data:www-data /var/www/server1/AndikaTravel.github.io
+    sudo chmod -R 755 /var/www/server1/AndikaTravel.github.io
+# Konfigurasi Apache untuk WordPress:
+    sudo nano /etc/apache2/sites-available/your-website.conf
+
+    <VirtualHost *:80>
+        ServerAdmin admin@yourdomain.com
+        DocumentRoot /var/www/your-website
+        ServerName your-website.com
+        <Directory /var/www/your-website>
+            AllowOverride All
+        </Directory>
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+# Aktifkan situs dan modul rewrite:
+    sudo a2ensite your-website.conf
+    sudo a2enmod rewrite
+    sudo systemctl reload apache2
     
+    penjelasan: saya mengkonfigurasi WordPress pada server yang saya host sendiri menggunakan Apache web server, yang memungkinkan saya memiliki kontrol penuh atas lingkungan hosting saya. Ini juga memastikan bahwa situs web saya dapat menangani lebih banyak lalu lintas dan saya dapat menyesuaikan server sesuai kebutuhan spesifik saya.
