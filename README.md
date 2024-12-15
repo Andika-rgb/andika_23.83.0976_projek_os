@@ -1,5 +1,9 @@
 # andika_23.83.0976_projek_os
 andika hendrawan_23.83.0976_23TK01
+# tanggal menambahkan layanan server:
+1. apache2, 1 desember 2024
+2. mysql, 14 desember 2024
+3. wordpress 14 desember 2024
 
 # Judul: Manajemen Server Terpadu dengan Nginx, PostgreSQL, Flask, Grafana, dan Keycloak
 
@@ -36,7 +40,7 @@ andika hendrawan_23.83.0976_23TK01
     sudo chown -R www-data:www-data /var/www/server1/AndikaTravel.github.io
     sudo chmod -R 755 /var/www/your-website
 
-# 2. wordpress
+# 2. Mysql
 
 # Instal MySQL:
     sudo apt install mysql-server
@@ -50,21 +54,26 @@ andika hendrawan_23.83.0976_23TK01
     GRANT ALL PRIVILEGES ON wordpress.* TO 'dika'@'192.168.100.58';
     FLUSH PRIVILEGES;
     EXIT;
+    
+# 3. Wordpress
+
 # Unduh dan Ekstrak WordPress:
     cd /var/www/
     sudo curl -O https://wordpress.org/latest.tar.gz
     sudo tar xzvf latest.tar.gz
     sudo mv wordpress /var/www/server1/AndikaTravel.github.io
+    sudo cp wp-config-sample.php wp-config.php
 # Set Hak Akses:
     sudo chown -R www-data:www-data /var/www/server1/AndikaTravel.github.io
     sudo chmod -R 755 /var/www/server1/AndikaTravel.github.io
+    
 # Konfigurasi Apache untuk WordPress:
     sudo nano /etc/apache2/sites-available/your-website.conf
 
     <VirtualHost *:80>
-        ServerAdmin admin@yourdomain.com
-        DocumentRoot /var/www/your-website
-        ServerName your-website.com
+        ServerAdmin admin@192.168.100.58
+        DocumentRoot /var/www/server1/AndikaTravel.github.io
+        ServerName 192.168.100.58
         <Directory /var/www/your-website>
             AllowOverride All
         </Directory>
@@ -72,8 +81,36 @@ andika hendrawan_23.83.0976_23TK01
         CustomLog ${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
 # Aktifkan situs dan modul rewrite:
-    sudo a2ensite your-website.conf
+    sudo a2ensite server1.conf
     sudo a2enmod rewrite
     sudo systemctl reload apache2
     
     penjelasan: saya mengkonfigurasi WordPress pada server yang saya host sendiri menggunakan Apache web server, yang memungkinkan saya memiliki kontrol penuh atas lingkungan hosting saya. Ini juga memastikan bahwa situs web saya dapat menangani lebih banyak lalu lintas dan saya dapat menyesuaikan server sesuai kebutuhan spesifik saya.
+
+# Edit wp-config.php, samakan seperti tadi membuat databse di mySQL:
+    sudo nano /var/www/server1/AndikaTravel.github.io/wordpress/wp-config.php
+
+    /** The name of the database for WordPress */
+    define('DB_NAME', 'wordpress');
+    
+    /** MySQL database username */
+    define('DB_USER', 'dika');
+    
+    /** MySQL database password */
+    define('DB_PASSWORD', 'terlalu12');
+    
+    /** MySQL hostname */
+    define('DB_HOST', '192.168.100.58');
+    
+    /** Database Charset to use in creating database tables. */
+    define('DB_CHARSET', 'utf8mb4');
+    
+    /** The Database Collate type. Don't change this if in doubt. */
+    define('DB_COLLATE', '');
+
+# Pastikan Basis Data MySQL Berjalan:
+    sudo systemctl start mysql
+    sudo systemctl restart mysql
+    sudo systemctl status mysql
+Setelah melakukan langkah-langkah ini, coba lagi untuk mengakses URL instalasi WordPress melalui browser:
+http://192.168.100.58/wp-admin/install.php
