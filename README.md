@@ -38,7 +38,7 @@ andika hendrawan_23.83.0976_23TK01
     sudo ufw status
 # Pastikan direktori memiliki hak akses yang benar:
     sudo chown -R www-data:www-data /var/www/server1/AndikaTravel.github.io
-    sudo chmod -R 755 /var/www/your-website
+    sudo chmod -R 755 /var/www/server1/AndikaTravel.github.io
 
 # 2. Mysql
 
@@ -74,7 +74,7 @@ andika hendrawan_23.83.0976_23TK01
         ServerAdmin admin@192.168.100.58
         DocumentRoot /var/www/server1/AndikaTravel.github.io
         ServerName 192.168.100.58
-        <Directory /var/www/your-website>
+        <Directory /var/www/server1/AndikaTravel.github.io>
             AllowOverride All
         </Directory>
         ErrorLog ${APACHE_LOG_DIR}/error.log
